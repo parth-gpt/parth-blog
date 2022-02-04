@@ -1,0 +1,23 @@
+@keyframes slideInFromBottom {
+    0% {
+      transform: translateY(70%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+.header{
+    animation: 1.5s ease-out 0s 1 slideInFromBottom;
+}
+.txt{
+    color: #62291a;
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+.mid{
+    background-image: url(/static/img/road.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
