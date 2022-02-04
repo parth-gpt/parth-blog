@@ -332,7 +332,6 @@ figure {
 img,
 svg {
   vertical-align: middle;
-  border-radius: 0.75rem;
 }
 
 table {
@@ -5071,7 +5070,6 @@ fieldset:disabled .btn {
 .navbar-toggler:focus {
   text-decoration: none;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem;
 }
 
 .navbar-toggler-icon {
@@ -5572,7 +5570,6 @@ fieldset:disabled .btn {
   background-color: #fff;
   background-clip: border-box;
   border: 0 solid rgba(0, 0, 0, 0.125) !important;
-  border-radius: 1.25rem !important;
 }
 
 .card>hr {
@@ -22186,7 +22183,7 @@ label,
 }
 
 .bg-gradient-dark {
-  background-image: linear-gradient(195deg, #2c2c2c 0%, #686868 100%); 
+  background-image: linear-gradient(195deg, #2c2c2c 0%, #00000096 100%);
 }
 
 .bg-gradient-faded-primary {
@@ -27231,11 +27228,6 @@ pre[class*="language-"] {
 
 /*# sourceMappingURL=kit-free.css.map */
 
-@media (max-width: 524px){
-  .page-header{
-    background-image: url(/static/assets/img/home-bg-3-524.png) !important;
-  }
-}
 
 .brand{
 color: black;
