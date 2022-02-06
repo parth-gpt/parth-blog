@@ -139,7 +139,7 @@
         </div>
       </div>
   </div>
-  <div class="container">
+  <div class="container d-none d-md-none d-lg-block">
     <div class="row">
       <div class="col-lg-10 col-md-10 mx-auto my-6">
         {% for post in all_posts %}
@@ -175,6 +175,44 @@
       </div>
     </div>
   </div>
+  
+  <div class="container d-lg-none mt-5">
+  {% for post in all_posts %}
+  <div class="container mt-sm-5">
+    <div class="page-header py-3 py-md-3 my-sm-3 mb-3 border-radius-xl" style="background-image: url({{post.img_url}});" loading="lazy">
+      <span class="mask bg-gradient-dark"></span>
+      <div class="container">
+        <div class="row py-4">
+          <div class="col-lg-6 ms-lg-5">
+            <a href="{{ url_for('show_post', post_id=post.id) }}">
+              <h2 class="post-title text-white">
+                {{post.title}}
+              </h2>
+              <h4 class="post-subtitle text-white">
+                {{post.subtitle}}
+              </h4>
+            </a>
+            <p class="post-meta text-white" style="font-size: 1rem;">Posted by
+              <a href="#" class="text-white">{{post.author.name}}</a>
+              on {{post.date}}
+              {% if current_user.id == 1: %}
+               <a href="{{url_for('delete_post', post_id=post.id) }}" class="text-white">✘</a>
+              {% endif %}
+            </p>
+            <a href="{{ url_for('show_post', post_id=post.id) }}" class="text-white">Continue reading</a>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+  {% endfor %}
+   
+  {% if current_user.id == 1: %}
+  <div class="clearfix text-center">
+    <a class="btn btn-primary float-right" href="{{url_for('add_new_post')}}">Create New Post</a>
+  </div>
+  {% endif %}
+ </div>
 
  <div class="container" style="text-align: center; margin-top: 4rem;">
     <h1 style="font-size:2.2rem;">@theshutterstories</h1>
