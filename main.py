@@ -1,5 +1,6 @@
+import smtplib
 from functools import wraps
-from flask import abort
+from flask import abort, request
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
@@ -13,6 +14,9 @@ from sqlalchemy import Table, Column, Integer, ForeignKey
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
+
+MY_EMAIL = "ppaarrtthh1001@gmail.com"
+MY_PASSWORD = "gmail@password"
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6b"
@@ -99,6 +103,14 @@ class Comment(db.Model):
 
 db.create_all()
 
+def send_email(name, email, phone, message):
+    email_message = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage:{message}"
+    with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+        connection.starttls()
+        connection.login(user=MY_EMAIL, password=MY_PASSWORD)
+        connection.sendmail(from_addr=MY_EMAIL,
+                            to_addrs=MY_EMAIL,
+                            msg=email_message)
 
 @app.route('/')
 def get_all_posts():
@@ -185,7 +197,11 @@ def about():
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html", current_user=current_user)
+        if request.method == "POST":
+        data = request.form
+        send_email(data["name"], data["email"], data["phone"], data["message"])
+        return render_template("contact.html", msg_sent=True, current_user=current_user)
+    return render_template("contact.html", msg_sent=False, current_user=current_user)
 
 
 @app.route("/new-post", methods=["GET", "POST"])
